@@ -98,7 +98,7 @@ def main():
 
         for c in concurrencies:
             qps, p50, p95, p99 = run_concurrent_queries(
-                lambda q: qdrant.search(collection_name="bench", query_vector=q, limit=10), queries, c
+                lambda q: qdrant.query_points(collection_name="bench", query=q, limit=10), queries, c
             )
             results.append(["Qdrant", dim, n_vecs, c, qps, p50, p95, p99, qdrant_idx_time, qdrant_ram])
 

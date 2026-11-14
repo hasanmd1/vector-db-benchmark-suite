@@ -1,0 +1,36 @@
+name: Vector DB Empirical Benchmark
+
+on:
+  workflow_dispatch:  # Allows you to trigger it manually with a button click!
+
+jobs:
+  run-benchmark:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Start Qdrant and Milvus containers
+        run: |
+          docker compose up -d
+          echo "Waiting 30s for database healthchecks..."
+          sleep 30
+
+      - name: Run Benchmark Suite
+        run: python benchmark.py
+
+      - name: Upload Results and Figures
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: |
+            results.csv
+            latency_curves.png

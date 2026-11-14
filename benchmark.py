@@ -56,7 +56,7 @@ def run_concurrent_queries(query_fn, queries, concurrency, duration_sec=20):
     return round(qps, 2), round(p50, 2), round(p95, 2), round(p99, 2)
 
 def main():
-    # Scaled tiers to run cleanly within GitHub Actions free runner limits (~25 mins)
+    # Scaled tiers to run cleanly within GitHub Actions free runner limits
     configs = [(384, 50000), (1536, 50000)]
     concurrencies = [1, 10, 50, 100]
     results = []
@@ -71,8 +71,8 @@ def main():
         chroma_client = chromadb.PersistentClient(path=f"./chroma_db_{dim}")
         t0 = time.perf_counter()
         col = chroma_client.get_or_create_collection(name="bench", metadata={"hnsw:space": "cosine"})
-        for i in range(0, n_vecs, 5000):
-            col.add(ids=[str(x) for x in ids[i:i+5000]], embeddings=vectors[i:i+5000])
+        for i in range(0, n_vecs, 1000):
+            col.add(ids=[str(x) for x in ids[i:i+1000]], embeddings=vectors[i:i+1000])
         chroma_idx_time = round(time.perf_counter() - t0, 2)
 
         for c in concurrencies:
@@ -83,13 +83,15 @@ def main():
 
         # 2. QDRANT (Client-Server)
         qdrant = QdrantClient(host="localhost", port=6333)
-        qdrant.recreate_collection(
+        if qdrant.collection_exists(collection_name="bench"):
+            qdrant.delete_collection(collection_name="bench")
+        qdrant.create_collection(
             collection_name="bench",
             vectors_config=VectorParams(size=dim, distance=Distance.COSINE)
         )
         t0 = time.perf_counter()
-        for i in range(0, n_vecs, 5000):
-            pts = [PointStruct(id=ids[j], vector=vectors[j]) for j in range(i, i+5000)]
+        for i in range(0, n_vecs, 1000):
+            pts = [PointStruct(id=ids[j], vector=vectors[j]) for j in range(i, min(i+1000, n_vecs))]
             qdrant.upsert(collection_name="bench", points=pts)
         qdrant_idx_time = round(time.perf_counter() - t0, 2)
         qdrant_ram = get_container_ram_mb("qdrant")
@@ -106,8 +108,8 @@ def main():
             milvus.drop_collection("bench")
         milvus.create_collection(collection_name="bench", dimension=dim, metric_type="COSINE")
         t0 = time.perf_counter()
-        for i in range(0, n_vecs, 5000):
-            data = [{"id": ids[j], "vector": vectors[j]} for j in range(i, i+5000)]
+        for i in range(0, n_vecs, 1000):
+            data = [{"id": ids[j], "vector": vectors[j]} for j in range(i, min(i+1000, n_vecs))]
             milvus.insert(collection_name="bench", data=data)
         milvus_idx_time = round(time.perf_counter() - t0, 2)
         milvus_ram = get_container_ram_mb("milvus")

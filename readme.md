@@ -14,19 +14,6 @@ As Retrieval-Augmented Generation (RAG) pipelines scale in production, database 
 
 ---
 
-## Repository Structure
-
-```text
-├── dataset/              # Synthetic embedding generators and normalization scripts
-├── drivers/              # Asynchronous benchmark orchestration scripts (asyncio)
-├── docker/               # Docker Compose files for isolated database containers (Chroma, Qdrant, Milvus)
-├── results/              # Raw experimental CSV metrics and logs
-└── README.md
-
-```
-
----
-
 ## Key Findings Summary
 
 * **Embedded Storage (Chroma):** Delivers ultra-low baseline latency ($P_{99} < 6\text{ ms}$) and zero socket serialization overhead for single-tenant or read-heavy workloads, but suffers from throughput saturation and thread locking under high concurrent write/read pressure.

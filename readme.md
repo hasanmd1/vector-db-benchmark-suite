@@ -1,6 +1,7 @@
 # Vector Database Benchmark Suite
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24325411.svg)](https://doi.org/10.5281/zenodo.24325411)
+[![Vector DB Empirical Benchmark](https://github.com/hasanmd1/vector-db-benchmark-suite/actions/workflows/benchmark.yml/badge.svg)](https://github.com/hasanmd1/vector-db-benchmark-suite/actions/workflows/benchmark.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---

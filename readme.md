@@ -1,6 +1,7 @@
 # Vector Database Benchmark Suite
 
-An empirical benchmarking and evaluation framework for comparing **Embedded** (Chroma), **Standalone Client-Server** (Qdrant), and **Distributed Cloud-Native** (Milvus) vector database architectures under varying dataset scales, dimensionalities, and multi-client concurrency workloads.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24325411.svg)](https://doi.org/10.5281/zenodo.24325411)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
@@ -55,17 +56,22 @@ python drivers/benchmark_runner.py --vectors 50000 --dims 384 --concurrency 100
 
 ## Citation
 
-If you use this benchmark suite or dataset generator in your research or systems engineering work, please cite:
+If you use this benchmark suite or dataset generator in your research, systems engineering work, or scholarship applications, please cite this work as follows:
 
+> Hasan, M. Z. (2026). *An Empirical Analysis of Embedded versus Dedicated Client-Server Architectures for High-Throughput Vector Retrieval-Augmented Generation Systems* (Version v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.24325411
+
+**BibTeX:**
 ```bibtex
-@article{hasan2026vector,
-  title={An Empirical Analysis of Embedded versus Dedicated Client-Server Architectures for High-Throughput Vector Retrieval-Augmented Generation Systems},
-  author={Hasan, Md Zahid},
-  journal={Preprints.org},
-  year={2026}
+@misc{hasan2026vector,
+  author       = {Hasan, Md Zahid},
+  title        = {{An Empirical Analysis of Embedded versus Dedicated Client-Server Architectures for High-Throughput Vector Retrieval-Augmented Generation Systems}},
+  month        = nov,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {v1.0.0},
+  doi          = {10.5281/zenodo.24325411},
+  url          = {[https://doi.org/10.5281/zenodo.24325411](https://doi.org/10.5281/zenodo.24325411)}
 }
-
-```
 
 ---
 

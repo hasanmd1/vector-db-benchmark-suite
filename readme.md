@@ -55,9 +55,9 @@ python drivers/benchmark_runner.py --vectors 50000 --dims 384 --concurrency 100
 
 ---
 
-## Citation
+## Citation & License
 
-If you use this benchmark suite or dataset generator in your research, systems engineering work, or scholarship applications, please cite this work as follows:
+This project is open-source under the MIT License. If you utilize this benchmarking framework, software, or dataset in your academic research or technical publications, please cite this work as follows:
 
 > Hasan, M. Z. (2026). *An Empirical Analysis of Embedded versus Dedicated Client-Server Architectures for High-Throughput Vector Retrieval-Augmented Generation Systems* (Version v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.24325411
 
@@ -73,13 +73,4 @@ If you use this benchmark suite or dataset generator in your research, systems e
   doi          = {10.5281/zenodo.24325411},
   url          = {[https://doi.org/10.5281/zenodo.24325411](https://doi.org/10.5281/zenodo.24325411)}
 }
-
----
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-```
-
 ```
